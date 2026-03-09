@@ -10,28 +10,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ch.wiss.m450.starter_project.model.Item;
-import ch.wiss.m450.starter_project.repository.ItemRepository;
+import ch.wiss.m450.starter_project.service.ItemService;
 
 @RestController
 @RequestMapping("/items")
 @CrossOrigin
 public class ItemController {
     @Autowired
-    private ItemRepository _itemRepository;
+    private ItemService itemService;
 
     @GetMapping
     public Iterable<Item> getItems() {
-        return _itemRepository.findAll();
+        return itemService.getAllItems();
     }
 
     @PostMapping("/{itemName}")
     public void addItem(@PathVariable String itemName) {
-        Item newItem = new Item(itemName);
-        _itemRepository.save(newItem);
+        itemService.addItem(itemName);
     }
 
     @DeleteMapping("/{itemId}")
     public void deleteItem(@PathVariable int itemId) {
-        _itemRepository.deleteById(itemId);
+        itemService.deleteItem(itemId);
     }
 }

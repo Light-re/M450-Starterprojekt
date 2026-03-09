@@ -1,7 +1,7 @@
 package ch.wiss.m450.starter_project.controller;
 
 import ch.wiss.m450.starter_project.model.Item;
-import ch.wiss.m450.starter_project.repository.ItemRepository;
+import ch.wiss.m450.starter_project.service.ItemService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.when;
 class ItemControllerMockTest {
 
     @Mock
-    private ItemRepository itemRepository;
+    private ItemService itemService;
 
     @InjectMocks
     private ItemController itemController;
@@ -33,7 +33,7 @@ class ItemControllerMockTest {
     private List<Item> spyItems = new ArrayList<>();
 
     @Captor
-    private ArgumentCaptor<Item> itemCaptor;
+    private ArgumentCaptor<String> itemNameCaptor;
 
     @BeforeEach
     void setUp() {
@@ -44,28 +44,27 @@ class ItemControllerMockTest {
 
     @Test
     void getItemsReturnsRepositoryContentAndUsesSpyList() {
-        when(itemRepository.findAll()).thenReturn(spyItems);
+        when(itemService.getAllItems()).thenReturn(spyItems);
 
         Iterable<Item> result = itemController.getItems();
 
-        verify(itemRepository, times(1)).findAll();
+        verify(itemService, times(1)).getAllItems();
         assertEquals(2, spyItems.size());
         assertEquals(spyItems, result);
     }
 
     @Test
-    void addItemCapturesSavedEntityWithExpectedName() {
+    void addItemCapturesDelegatedNameWithExpectedValue() {
         itemController.addItem("Monitor");
 
-        verify(itemRepository, times(1)).save(itemCaptor.capture());
-        Item savedItem = itemCaptor.getValue();
-        assertEquals("Monitor", savedItem.getName());
+        verify(itemService, times(1)).addItem(itemNameCaptor.capture());
+        assertEquals("Monitor", itemNameCaptor.getValue());
     }
 
     @Test
     void deleteItemDelegatesToRepositoryById() {
         itemController.deleteItem(7);
 
-        verify(itemRepository, times(1)).deleteById(7);
+        verify(itemService, times(1)).deleteItem(7);
     }
 }
