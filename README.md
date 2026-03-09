@@ -53,27 +53,37 @@ mvn spring-boot:run
 
 ## Tests ausführen (ab GitHub-Repo)
 
-### Backend Unit- und Mock-Tests
+Alle Befehle unten werden vom **Repository-Root** ausgeführt.
+
+### Schnellübersicht Befehle
+
+```shell
+# 1) Backend Unit- und Mock-Tests
+cd src/back-end
+mvn test
+
+# 2) Frontend Jest-Tests
+cd ../front-end
+npm install
+npm test
+
+# 3) Frontend Playwright-Tests
+npm run test:e2e
+```
+
+### Komplettdurchlauf in empfohlener Reihenfolge
 
 ```shell
 cd src/back-end
 mvn test
-```
 
-### Frontend Jest-Tests
-
-```shell
-cd src/front-end
+cd ../front-end
 npm install
 npm test
-```
-
-### Frontend Playwright-Tests
-
-```shell
-cd src/front-end
 npm run test:e2e
 ```
+
+Hinweis: `npx playwright install` ist nur bei der ersten lokalen Ausführung nötig.
 
 ### CI auf GitHub
 

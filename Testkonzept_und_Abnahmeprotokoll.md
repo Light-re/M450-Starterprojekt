@@ -165,9 +165,9 @@
 `src/back-end/src/test/java/ch/wiss/m450/starter_project/controller/ItemControllerMockTest.java`
 
 **Nachweis:**
-- `@Mock` auf Repository
+- `@Mock` auf Service-Abhängigkeit (`ItemService`)
 - `@Spy` auf Testdatenliste
-- `@Captor` für gespeichertes `Item`
+- `@Captor` für delegierten `itemName`-Parameter
 
 ### 5.3 Jest Frontend-Tests (SQ5A)
 
