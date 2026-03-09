@@ -1,0 +1,3 @@
+Die aktuelle und verbindliche Version des Testkonzepts/Abnahmeprotokolls befindet sich in:
+
+- Testkonzept_und_Abnahmeprotokoll.md

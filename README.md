@@ -50,3 +50,34 @@ Ins Verzeichnis navigieren wo die `pom.xml`-Datei liegt und folgenden Befehl in 
 mvn clean install # bestenfalls nur einmalig notwendig oder wird evtl. auch durch IDE automatisch gemacht
 mvn spring-boot:run
 ```
+
+## Tests ausführen (ab GitHub-Repo)
+
+### Backend Unit- und Mock-Tests
+
+```shell
+cd src/back-end
+mvn test
+```
+
+### Frontend Jest-Tests
+
+```shell
+cd src/front-end
+npm install
+npm test
+```
+
+### Frontend Playwright-Tests
+
+```shell
+cd src/front-end
+npm run test:e2e
+```
+
+### CI auf GitHub
+
+Automatische Testausführung ist über GitHub Actions konfiguriert:
+
+- `.github/workflows/tests.yml`
+- Führt Backend-Tests (Maven), Frontend-Jest und Frontend-Playwright bei Push/Pull-Request aus.
