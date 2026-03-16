@@ -1,0 +1,6 @@
+projectKey=M450-Starterprojekt-Frontend
+serverUrl=http://localhost:9000
+serverVersion=26.3.0.120487
+dashboardUrl=http://localhost:9000/dashboard?id=M450-Starterprojekt-Frontend
+ceTaskId=d09a5b26-13e3-4029-85d5-a8d9d7c76310
+ceTaskUrl=http://localhost:9000/api/ce/task?id=d09a5b26-13e3-4029-85d5-a8d9d7c76310

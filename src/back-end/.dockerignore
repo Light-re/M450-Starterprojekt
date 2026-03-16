@@ -1,3 +1,7 @@
 target/
 .gitignore
 HELP.md
+.git/
+.scannerwork/
+.env
+.env.*

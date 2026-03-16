@@ -1,10 +1,8 @@
 package ch.wiss.m450.starter_project.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ch.wiss.m450.starter_project.model.Item;
@@ -13,12 +11,15 @@ import ch.wiss.m450.starter_project.repository.ItemRepository;
 @Service
 public class ItemService {
 
-    @Autowired
-    private ItemRepository itemRepository;
+    private final ItemRepository itemRepository;
+
+    public ItemService(ItemRepository itemRepository) {
+        this.itemRepository = itemRepository;
+    }
 
     public List<Item> getAllItems() {
         return StreamSupport.stream(itemRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Item addItem(String name) {

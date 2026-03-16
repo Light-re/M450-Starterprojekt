@@ -6,10 +6,13 @@ function ItemList() {
 
   useEffect(() => {
     fetch("http://localhost:8080/items")
-      .then(
-        (response) =>
-          (response.ok && response.json()) || Promise.reject(response)
-      )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+
+        throw new Error(`Failed to load items: ${response.status}`);
+      })
       .then((data) => setItems(data))
       .catch((error) => console.error(error));
   }, []);

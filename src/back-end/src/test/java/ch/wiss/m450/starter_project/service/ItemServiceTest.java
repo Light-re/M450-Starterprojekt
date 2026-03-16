@@ -18,7 +18,7 @@ import ch.wiss.m450.starter_project.model.Item;
 import ch.wiss.m450.starter_project.repository.ItemRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class ItemServiceTest {
+class ItemServiceTest {
 
     @Mock
     private ItemRepository itemRepository;

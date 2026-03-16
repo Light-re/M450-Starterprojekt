@@ -1,7 +1,5 @@
 package ch.wiss.m450.starter_project.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,10 +12,12 @@ import ch.wiss.m450.starter_project.service.ItemService;
 
 @RestController
 @RequestMapping("/items")
-@CrossOrigin
 public class ItemController {
-    @Autowired
-    private ItemService itemService;
+    private final ItemService itemService;
+
+    public ItemController(ItemService itemService) {
+        this.itemService = itemService;
+    }
 
     @GetMapping
     public Iterable<Item> getItems() {

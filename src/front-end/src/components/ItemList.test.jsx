@@ -28,4 +28,19 @@ describe('ItemList', () => {
     expect(await screen.findByText('Keyboard')).toBeInTheDocument();
     expect(screen.getByText('Mouse')).toBeInTheDocument();
   });
+
+  test('logs an error when backend response is not ok', async () => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    globalThis.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: false,
+      })
+    );
+
+    render(<ItemList />);
+
+    await waitFor(() => {
+      expect(console.error).toHaveBeenCalled();
+    });
+  });
 });

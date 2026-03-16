@@ -1,22 +1,28 @@
-function ItemRow(props) {
+import PropTypes from "prop-types";
+import { reloadPage } from "../utils/browser";
+
+function ItemRow({ item }) {
   function removeItem(event) {
     event.preventDefault();
 
-    fetch(`http://localhost:8080/items/${props.item.id}`, {
+    fetch(`http://localhost:8080/items/${item.id}`, {
       method: "DELETE",
     })
-      .then(
-        (response) =>
-          (response.ok && window.location.reload()) || Promise.reject(response)
-      )
+      .then((response) => {
+        if (response.ok) {
+          reloadPage();
+          return;
+        }
+
+        throw new Error(`Failed to delete item ${item.id}: ${response.status}`);
+      })
       .catch((error) => console.error(error));
   }
 
   return (
-    <>
-      <div className="row">
-        <div className="col-1">{props.item.id}</div>
-        <div className="col-5">{props.item.name}</div>
+    <div className="row">
+        <div className="col-1">{item.id}</div>
+        <div className="col-5">{item.name}</div>
         <div className="col-2">
           <svg
             onClick={removeItem}
@@ -31,8 +37,14 @@ function ItemRow(props) {
           </svg>
         </div>
       </div>
-    </>
   );
 }
+
+ItemRow.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default ItemRow;

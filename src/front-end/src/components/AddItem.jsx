@@ -1,16 +1,17 @@
 import { useState } from "react";
+import { reloadPage } from "../utils/browser";
 
 function AddItem() {
-  const [item_name, setItemName] = useState("");
+  const [itemName, setItemName] = useState("");
 
   function addClicked(event) {
     event.preventDefault();
 
-    fetch(`http://localhost:8080/items/${item_name}`, {
+    fetch(`http://localhost:8080/items/${itemName}`, {
       method: "POST"
     }).then((response) => {
       console.log(response);
-      window.location.reload();
+      reloadPage();
     });
   }
 
@@ -23,7 +24,7 @@ function AddItem() {
             type="text"
             className="form-control"
             placeholder="Itemname"
-            value={item_name}
+            value={itemName}
             onChange={(e) => setItemName(e.target.value)}
           />
         </div>

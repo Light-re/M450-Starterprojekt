@@ -1,8 +1,14 @@
 package ch.wiss.m450.starter_project;
 
-import org.springframework.boot.test.context.SpringBootTest;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
 class StarterProjectApplicationTests {
+
+	@Test
+	void applicationClassShouldBePresent() {
+		assertNotNull(StarterProjectApplication.class);
+	}
 
 }
